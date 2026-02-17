@@ -298,7 +298,7 @@
             gap: 32px;
         }
         .featured-main {
-            background: linear-gradient(160deg, #002050, #0067B8);
+            background: url('images/SUR26-EDU-PRO-12inch-Snapdragon-Platinum-Collab-Classroom-01.jpg') center/cover no-repeat;
             border-radius: 16px;
             overflow: hidden;
             color: #fff;
@@ -509,13 +509,16 @@
         .step-item:nth-child(2) .step-num-wrap { background: var(--ms-purple); }
         .step-item:nth-child(3) .step-num-wrap { background: var(--ms-teal); }
         .step-item:nth-child(4) .step-num-wrap { background: var(--ms-yellow); }
-        .step-item:nth-child(5) .step-num-wrap { background: var(--ms-green); }
+        .step-item:nth-child(5) .step-num-wrap { background: var(--ms-light-blue); }
         .step-num {
             font-size: 24px;
             font-weight: 700;
             color: #fff;
         }
         .step-item:nth-child(4) .step-num { color: var(--ms-dark-blue); }
+        .step-item:nth-child(5) .step-num { color: var(--ms-dark-blue); }
+        .step-item:nth-child(6) .step-num-wrap { background: var(--ms-accent-blue); }
+        .step-item:nth-child(6) .step-num { color: #fff; }
         .step-item h4 {
             font-size: 16px;
             font-weight: 700;
@@ -811,6 +814,83 @@
         }
         .gauge-pct { color: var(--ms-yellow); font-weight: 600; }
 
+        /* ===== QUIZ ACCORDION ===== */
+        .quiz-accordion { display: flex; flex-direction: column; gap: 8px; }
+        .quiz-item {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .quiz-item.answered { border-color: var(--ms-yellow); }
+        .quiz-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s;
+        }
+        .quiz-header:hover { background: rgba(255,255,255,0.05); }
+        .quiz-num {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .quiz-item.answered .quiz-num { background: var(--ms-yellow); color: var(--ms-dark-blue); }
+        .quiz-title { flex: 1; }
+        .quiz-chevron {
+            transition: transform 0.3s;
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+        .quiz-header.active .quiz-chevron { transform: rotate(180deg); opacity: 1; }
+        .quiz-body {
+            display: none;
+            padding: 0 16px 16px 54px;
+        }
+        .quiz-question {
+            font-size: 13px;
+            opacity: 0.75;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .quiz-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 14px;
+            margin-bottom: 6px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .quiz-option:hover { background: rgba(255,255,255,0.06); }
+        .quiz-option input[type="radio"] {
+            margin-top: 2px;
+            accent-color: var(--ms-yellow);
+            flex-shrink: 0;
+        }
+        .quiz-option span { color: rgba(255,255,255,0.9); }
+
         /* ===== PODCAST / VIDEO SECTION (Suggested Add-on) ===== */
         .media-section {
             padding: 80px 48px;
@@ -1079,27 +1159,23 @@
 </head>
 <body>
 
-<!-- TOP BANNER -->
-<div class="top-banner">
-    New: Microsoft Education AI Toolkit v4 is here &mdash; <a href="https://aka.ms/eduaitoolkit">Download the full guide</a>
-</div>
-
 <!-- NAVIGATION -->
 <nav class="nav">
     <div class="nav-left">
         <a href="#" class="nav-logo">
             <svg viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="11" height="11" fill="#f25022"/><rect x="12" y="0" width="11" height="11" fill="#7fba00"/><rect x="0" y="12" width="11" height="11" fill="#00a4ef"/><rect x="12" y="12" width="11" height="11" fill="#ffb900"/></svg>
-            <span><strong>Microsoft</strong> Education AI Toolkit</span>
+            <span style="color:var(--ms-gray-800);font-weight:400;">Microsoft</span>
+            <span style="border-left:1px solid var(--ms-gray-200);padding-left:10px;margin-left:2px;font-weight:600;color:var(--ms-gray-800);">Education</span>
         </a>
         <div class="nav-links">
-            <a href="#overview" class="active">Overview</a>
-            <a href="#navigators">AI Navigators</a>
-            <a href="#plan">Plan</a>
-            <a href="#implement">Implement</a>
-            <a href="#research">Research</a>
+            <a href="#">Products for your school</a>
+            <a href="#">Featured solution areas</a>
+            <a href="#">Browse by audience</a>
+            <a href="#">Training & resources</a>
+            <a href="#">Getting started</a>
         </div>
     </div>
-    <a href="https://aka.ms/eduaitoolkit" class="nav-cta" style="text-decoration:none;">Download Toolkit</a>
+    <a href="#" class="nav-cta" style="text-decoration:none;background:transparent;color:var(--ms-gray-800);border:1px solid var(--ms-gray-800);padding:6px 16px;font-size:13px;">Contact a sales partner</a>
 </nav>
 
 <!-- HERO -->
@@ -1108,7 +1184,7 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="hero-badge-dot"></span>
-                UPDATED JANUARY 2026
+                UPDATED FEBRUARY 2026
             </div>
             <h1>Navigate your institution's <em>AI journey</em></h1>
             <p class="hero-sub">A comprehensive guide for education leaders to plan, implement, and scale responsible AI across every level of their institution.</p>
@@ -1119,7 +1195,7 @@
                 </a>
                 <button class="btn-secondary">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3.5v9l7-4.5-7-4.5z"/></svg>
-                    Watch Overview
+                    Watch Overview &mdash; Coming Soon
                 </button>
             </div>
         </div>
@@ -1181,7 +1257,13 @@
             <span class="featured-tag">Leadership Perspective</span>
             <h2>Guiding education with responsible AI innovation</h2>
             <p>AI stands at an inflection point where generative AI fundamentally reimagines how we research, learn, and grow. This moment calls for both excitement and responsibility.</p>
-            <a href="#" class="read-more">Read the full perspective <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
+            <a href="javascript:void(0)" class="read-more" onclick="togglePerspective(this)">Read the full perspective <svg class="read-more-chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
+            <div class="perspective-expanded" style="display:none;margin-top:16px;padding:20px;background:rgba(0,20,50,0.92);border-radius:12px;border-left:3px solid var(--ms-yellow);">
+                <p style="font-size:14px;line-height:1.7;opacity:0.9;margin-bottom:12px;">We are at a moment where every institution must determine the right balance of enthusiasm and caution for their use of AI. For some, the rapid pace of AI development suggests exercising restraint, and for others AI represents an opportunity to break down traditional barriers in education for teachers and learners alike.</p>
+                <p style="font-size:14px;line-height:1.7;opacity:0.9;margin-bottom:12px;">That dynamic is exactly why we created the Education AI Toolkit &mdash; to help institutions navigate their unique AI journey. As someone who grew up in the classroom as a teacher and administrator, I believe the best innovations in education come when they are grounded in real educator needs and informed by responsible practice.</p>
+                <p style="font-size:14px;line-height:1.7;opacity:0.9;margin-bottom:12px;">This toolkit brings together frameworks for planning and implementation, real-world stories from institutions leading the way, and practical guidance for building AI-powered experiences. Whether you are just beginning to explore AI or scaling it across your institution, this resource is designed to meet you where you are.</p>
+                <p style="font-size:13px;font-weight:600;color:var(--ms-yellow);margin-top:16px;margin-bottom:0;">&mdash; Matt Jubelirer, Vice President, Microsoft Education</p>
+            </div>
         </div>
         <div class="featured-side">
             <div class="featured-card fade-in">
@@ -1209,7 +1291,6 @@
         <div class="section-header fade-in">
             <span class="section-label">AI Integration Phases</span>
             <h2 class="section-title">Three phases of AI adoption in education</h2>
-            <p class="section-desc">Institutions move through overlapping phases, with progress varying by function and role. What matters most is intentional adoption aligned to institutional values.</p>
         </div>
         <div class="phases-grid">
             <div class="phase-card fade-in">
@@ -1231,41 +1312,6 @@
     </div>
 </section>
 
-<!-- AI NAVIGATOR PILLARS -->
-<section class="section" id="navigators">
-    <div class="section-header fade-in">
-        <span class="section-label">AI Navigators</span>
-        <h2 class="section-title">Chart your AI roadmap through real-world stories</h2>
-        <p class="section-desc">Learn from institutions leading the way with research, experimentation, and deployment of AI solutions in education across the globe.</p>
-    </div>
-    <div class="nav-pillars">
-        <div class="pillar-card student fade-in">
-            <div class="pillar-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            </div>
-            <h3>Student Success</h3>
-            <p>Advance student success with AI-powered tools that support learning at every stage. Personalize learning, provide 24/7 tutoring, and prepare students through skills-based pathways.</p>
-            <a href="#" class="pillar-link">Explore 8 stories <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
-        </div>
-        <div class="pillar-card institution fade-in">
-            <div class="pillar-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
-            </div>
-            <h3>Institutional Innovation</h3>
-            <p>Drive institutional innovation, streamline operations, and improve efficiency with AI-powered insights and automation that modernize infrastructure.</p>
-            <a href="#" class="pillar-link">Explore 5 stories <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
-        </div>
-        <div class="pillar-card it fade-in">
-            <div class="pillar-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-            </div>
-            <h3>Simplify &amp; Secure IT</h3>
-            <p>Simplify and secure IT management with AI-powered protection. A unified, integrated tech stack that simplifies operations and safeguards learning environments.</p>
-            <a href="#" class="pillar-link">Explore 2 stories <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
-        </div>
-    </div>
-</section>
-
 <!-- CASE STUDY STORIES -->
 <section class="section-full section-gray">
     <div class="section" style="padding-top:0;padding-bottom:0;">
@@ -1275,8 +1321,7 @@
         </div>
         <div class="stories-grid">
             <div class="story-card fade-in">
-                <div class="story-img" style="background: linear-gradient(135deg, #1a3a5c, #2a6496); display:flex; align-items:center; justify-content:center;">
-                    <span style="font-size:48px;opacity:0.3;">NYC</span>
+                <div class="story-img" style="background: url('images/MSC21_Getty_remoteLearning_1215474876.jpg') center/cover no-repeat;">
                 </div>
                 <div class="story-body">
                     <div class="story-org">New York City Public Schools</div>
@@ -1285,8 +1330,7 @@
                 </div>
             </div>
             <div class="story-card fade-in">
-                <div class="story-img" style="background: linear-gradient(135deg, #2d5016, #4a7c28); display:flex; align-items:center; justify-content:center;">
-                    <span style="font-size:28px;opacity:0.3;">Auburn</span>
+                <div class="story-img" style="background: url('images/MSC25-AI Expression-EDU-Getty-1621253830-rgb.jpg') center/cover no-repeat;">
                 </div>
                 <div class="story-body">
                     <div class="story-org">Auburn University</div>
@@ -1295,8 +1339,7 @@
                 </div>
             </div>
             <div class="story-card fade-in">
-                <div class="story-img" style="background: linear-gradient(135deg, #5c1a1a, #964a2a); display:flex; align-items:center; justify-content:center;">
-                    <span style="font-size:24px;opacity:0.3;">Oregon State</span>
+                <div class="story-img" style="background: url('images/MSC25-AI Expression-Office-Getty-1464824753-rgb.jpg') center/cover no-repeat;">
                 </div>
                 <div class="story-body">
                     <div class="story-org">Oregon State University</div>
@@ -1305,8 +1348,7 @@
                 </div>
             </div>
             <div class="story-card fade-in">
-                <div class="story-img" style="background: linear-gradient(135deg, #1a3a5c, #6B2D8B); display:flex; align-items:center; justify-content:center;">
-                    <span style="font-size:20px;opacity:0.3;">Tec de Monterrey</span>
+                <div class="story-img" style="background: url('images/MSC24-LATAM-STEM-Getty-1356638196-rgb.jpg') center/cover no-repeat;">
                 </div>
                 <div class="story-body">
                     <div class="story-org">Tecnologico de Monterrey</div>
@@ -1315,8 +1357,7 @@
                 </div>
             </div>
             <div class="story-card fade-in">
-                <div class="story-img" style="background: linear-gradient(135deg, #003366, #0078D4); display:flex; align-items:center; justify-content:center;">
-                    <span style="font-size:18px;opacity:0.3;">Univ. of Sydney</span>
+                <div class="story-img" style="background: url('images/MSC24-CEMA-education-Getty-1495502721-rgb.jpg') center/cover no-repeat;">
                 </div>
                 <div class="story-body">
                     <div class="story-org">University of Sydney</div>
@@ -1325,8 +1366,7 @@
                 </div>
             </div>
             <div class="story-card fade-in">
-                <div class="story-img" style="background: linear-gradient(135deg, #1a5c3a, #28964a); display:flex; align-items:center; justify-content:center;">
-                    <span style="font-size:20px;opacity:0.3;">Wichita PS</span>
+                <div class="story-img" style="background: url('images/MSC24-Canada-education-Getty-1287436716-rgb.jpg') center/cover no-repeat;">
                 </div>
                 <div class="story-body">
                     <div class="story-org">Wichita Public Schools</div>
@@ -1343,7 +1383,6 @@
     <div class="section-header fade-in">
         <span class="section-label">Implementation Roadmap</span>
         <h2 class="section-title">AI implementation in five steps</h2>
-        <p class="section-desc">A practical framework for education leaders to move from exploration to measurable impact.</p>
     </div>
     <div class="steps-container fade-in" style="position:relative;">
         <div class="step-connector"></div>
@@ -1371,6 +1410,151 @@
             <div class="step-num-wrap"><span class="step-num">5</span></div>
             <h4>Evaluate &amp; Review</h4>
             <p>Assess impact against goals, monitor AI's influence on outcomes, and iterate based on results.</p>
+        </div>
+    </div>
+</section>
+
+<!-- AI READINESS ASSESSMENT -->
+<section class="assessment-section">
+    <div class="assessment-inner">
+        <div class="assessment-content fade-in">
+            <span class="section-label" style="color:var(--ms-yellow);">Get Started</span>
+            <h2>Interactive AI Readiness Assessment</h2>
+            <p>Self-assessment tool that helps education leaders gauge where their institution stands across key AI adoption dimensions, then maps a personalized next-steps pathway.</p>
+            <ul class="assessment-features">
+                <li>Data infrastructure &amp; governance maturity scoring</li>
+                <li>Professional development readiness benchmarking</li>
+                <li>Policy &amp; compliance gap identification</li>
+                <li>Personalized resource recommendations by role</li>
+                <li>Peer benchmarking against similar institutions</li>
+            </ul>
+        </div>
+        <div class="assessment-visual fade-in">
+            <!-- Default view: score preview + button -->
+            <div id="assessment-preview">
+                <div style="font-size:18px;font-weight:700;margin-bottom:24px;">Your AI Readiness Score</div>
+                <div class="gauge-row">
+                    <div class="gauge-header"><span>Data Infrastructure</span><span class="gauge-pct" id="score-0">--</span></div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="bar-0" style="width:0%;background:var(--ms-blue);transition:width 1s;"></div></div>
+                </div>
+                <div class="gauge-row">
+                    <div class="gauge-header"><span>Governance &amp; Policy</span><span class="gauge-pct" id="score-1">--</span></div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="bar-1" style="width:0%;background:var(--ms-purple);transition:width 1s;"></div></div>
+                </div>
+                <div class="gauge-row">
+                    <div class="gauge-header"><span>Professional Learning</span><span class="gauge-pct" id="score-2">--</span></div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="bar-2" style="width:0%;background:var(--ms-teal);transition:width 1s;"></div></div>
+                </div>
+                <div class="gauge-row">
+                    <div class="gauge-header"><span>Security Readiness</span><span class="gauge-pct" id="score-3">--</span></div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="bar-3" style="width:0%;background:var(--ms-green);transition:width 1s;"></div></div>
+                </div>
+                <div class="gauge-row">
+                    <div class="gauge-header"><span>Community Engagement</span><span class="gauge-pct" id="score-4">--</span></div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="bar-4" style="width:0%;background:var(--ms-yellow);transition:width 1s;"></div></div>
+                </div>
+                <div style="margin-top:20px;text-align:center;">
+                    <button class="btn-primary" style="font-size:13px;padding:10px 20px;" onclick="toggleAssessment()">Take the Assessment</button>
+                </div>
+            </div>
+
+            <!-- Accordion quiz (hidden by default) -->
+            <div id="assessment-quiz" style="display:none;">
+                <div style="font-size:18px;font-weight:700;margin-bottom:20px;">AI Readiness Self-Assessment</div>
+
+                <div class="quiz-accordion">
+                    <!-- Q1: Data Infrastructure -->
+                    <div class="quiz-item" id="qi-0">
+                        <button class="quiz-header active" onclick="toggleQuestion(0)">
+                            <span class="quiz-num">1</span>
+                            <span class="quiz-title">Data Infrastructure &amp; Integration</span>
+                            <svg class="quiz-chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+                        </button>
+                        <div class="quiz-body" style="display:block;">
+                            <p class="quiz-question">How well is your institution's data infrastructure prepared for AI integration?</p>
+                            <label class="quiz-option"><input type="radio" name="q0" value="25" onchange="checkProgress()"> <span>We have significant data silos with no centralized system</span></label>
+                            <label class="quiz-option"><input type="radio" name="q0" value="50" onchange="checkProgress()"> <span>Some data is centralized, but integration is limited</span></label>
+                            <label class="quiz-option"><input type="radio" name="q0" value="75" onchange="checkProgress()"> <span>Most data is integrated with a governance framework emerging</span></label>
+                            <label class="quiz-option"><input type="radio" name="q0" value="100" onchange="checkProgress()"> <span>Fully integrated data ecosystem with strong governance in place</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Q2: Governance & Policy -->
+                    <div class="quiz-item" id="qi-1">
+                        <button class="quiz-header" onclick="toggleQuestion(1)">
+                            <span class="quiz-num">2</span>
+                            <span class="quiz-title">Governance &amp; Responsible AI Policy</span>
+                            <svg class="quiz-chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+                        </button>
+                        <div class="quiz-body">
+                            <p class="quiz-question">Where does your institution stand on AI governance and responsible use policies?</p>
+                            <label class="quiz-option"><input type="radio" name="q1" value="25" onchange="checkProgress()"> <span>No formal AI policies or governance structure exists</span></label>
+                            <label class="quiz-option"><input type="radio" name="q1" value="50" onchange="checkProgress()"> <span>Informal guidelines exist but are not consistently enforced</span></label>
+                            <label class="quiz-option"><input type="radio" name="q1" value="75" onchange="checkProgress()"> <span>Formal policies are in place with designated oversight</span></label>
+                            <label class="quiz-option"><input type="radio" name="q1" value="100" onchange="checkProgress()"> <span>Comprehensive responsible AI framework aligned with institutional values</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Q3: Professional Learning -->
+                    <div class="quiz-item" id="qi-2">
+                        <button class="quiz-header" onclick="toggleQuestion(2)">
+                            <span class="quiz-num">3</span>
+                            <span class="quiz-title">Professional Learning &amp; AI Literacy</span>
+                            <svg class="quiz-chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+                        </button>
+                        <div class="quiz-body">
+                            <p class="quiz-question">How advanced is your institution's professional development for AI in education?</p>
+                            <label class="quiz-option"><input type="radio" name="q2" value="25" onchange="checkProgress()"> <span>No structured AI training for educators or staff</span></label>
+                            <label class="quiz-option"><input type="radio" name="q2" value="50" onchange="checkProgress()"> <span>Some introductory AI awareness sessions have been offered</span></label>
+                            <label class="quiz-option"><input type="radio" name="q2" value="75" onchange="checkProgress()"> <span>Ongoing AI professional development with role-specific pathways</span></label>
+                            <label class="quiz-option"><input type="radio" name="q2" value="100" onchange="checkProgress()"> <span>Comprehensive AI literacy program with credentialing and peer coaching</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Q4: Security Readiness -->
+                    <div class="quiz-item" id="qi-3">
+                        <button class="quiz-header" onclick="toggleQuestion(3)">
+                            <span class="quiz-num">4</span>
+                            <span class="quiz-title">Security &amp; Compliance Readiness</span>
+                            <svg class="quiz-chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+                        </button>
+                        <div class="quiz-body">
+                            <p class="quiz-question">How prepared is your IT environment to securely support AI tools and protect student data?</p>
+                            <label class="quiz-option"><input type="radio" name="q3" value="25" onchange="checkProgress()"> <span>Basic security measures; no AI-specific protections in place</span></label>
+                            <label class="quiz-option"><input type="radio" name="q3" value="50" onchange="checkProgress()"> <span>Standard security stack with some compliance monitoring</span></label>
+                            <label class="quiz-option"><input type="radio" name="q3" value="75" onchange="checkProgress()"> <span>AI-aware security policies with automated threat detection</span></label>
+                            <label class="quiz-option"><input type="radio" name="q3" value="100" onchange="checkProgress()"> <span>Zero Trust architecture with AI-powered security operations (e.g., Security Copilot)</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Q5: Community Engagement -->
+                    <div class="quiz-item" id="qi-4">
+                        <button class="quiz-header" onclick="toggleQuestion(4)">
+                            <span class="quiz-num">5</span>
+                            <span class="quiz-title">Stakeholder &amp; Community Engagement</span>
+                            <svg class="quiz-chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+                        </button>
+                        <div class="quiz-body">
+                            <p class="quiz-question">How engaged are your stakeholders in your institution's AI strategy?</p>
+                            <label class="quiz-option"><input type="radio" name="q4" value="25" onchange="checkProgress()"> <span>AI decisions are made by a small group with little broader input</span></label>
+                            <label class="quiz-option"><input type="radio" name="q4" value="50" onchange="checkProgress()"> <span>Some stakeholder communication, but engagement is inconsistent</span></label>
+                            <label class="quiz-option"><input type="radio" name="q4" value="75" onchange="checkProgress()"> <span>Active engagement from educators, IT, and leadership with feedback loops</span></label>
+                            <label class="quiz-option"><input type="radio" name="q4" value="100" onchange="checkProgress()"> <span>Broad coalition including students, families, and community in AI planning</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="quiz-result" style="display:none;margin-top:20px;padding:20px;background:rgba(255,255,255,0.08);border-radius:12px;text-align:center;">
+                    <div style="font-size:14px;opacity:0.7;margin-bottom:4px;">Your Overall AI Readiness</div>
+                    <div id="quiz-total" style="font-size:42px;font-weight:700;color:var(--ms-yellow);"></div>
+                    <p id="quiz-recommendation" style="font-size:14px;opacity:0.85;margin-top:8px;line-height:1.5;"></p>
+                    <a href="https://aka.ms/eduaitoolkit" class="btn-primary" style="text-decoration:none;font-size:13px;padding:10px 20px;margin-top:16px;display:inline-flex;">Download the Full Toolkit</a>
+                </div>
+
+                <div style="margin-top:16px;text-align:center;">
+                    <button class="btn-primary" style="font-size:13px;padding:10px 20px;opacity:0.5;" id="quiz-submit-btn" onclick="submitAssessment()" disabled>Submit Assessment</button>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -1452,96 +1636,6 @@
     </div>
 </section>
 
-<!-- AI READINESS ASSESSMENT (Suggested Enhancement) -->
-<section class="assessment-section">
-    <div class="assessment-inner">
-        <div class="assessment-content fade-in">
-            <span class="section-label" style="color:var(--ms-yellow);">Suggested Enhancement</span>
-            <h2>Interactive AI Readiness Assessment</h2>
-            <p>An embedded self-assessment tool that helps education leaders gauge where their institution stands across key AI adoption dimensions, then maps a personalized next-steps pathway.</p>
-            <ul class="assessment-features">
-                <li>Data infrastructure &amp; governance maturity scoring</li>
-                <li>Professional development readiness benchmarking</li>
-                <li>Policy &amp; compliance gap identification</li>
-                <li>Personalized resource recommendations by role</li>
-                <li>Peer benchmarking against similar institutions</li>
-            </ul>
-        </div>
-        <div class="assessment-visual fade-in">
-            <div style="font-size:18px;font-weight:700;margin-bottom:24px;">Your AI Readiness Score</div>
-            <div class="gauge-row">
-                <div class="gauge-header"><span>Data Infrastructure</span><span class="gauge-pct">72%</span></div>
-                <div class="gauge-bar"><div class="gauge-fill" style="width:72%;background:var(--ms-blue);"></div></div>
-            </div>
-            <div class="gauge-row">
-                <div class="gauge-header"><span>Governance &amp; Policy</span><span class="gauge-pct">58%</span></div>
-                <div class="gauge-bar"><div class="gauge-fill" style="width:58%;background:var(--ms-purple);"></div></div>
-            </div>
-            <div class="gauge-row">
-                <div class="gauge-header"><span>Professional Learning</span><span class="gauge-pct">45%</span></div>
-                <div class="gauge-bar"><div class="gauge-fill" style="width:45%;background:var(--ms-teal);"></div></div>
-            </div>
-            <div class="gauge-row">
-                <div class="gauge-header"><span>Security Readiness</span><span class="gauge-pct">81%</span></div>
-                <div class="gauge-bar"><div class="gauge-fill" style="width:81%;background:var(--ms-green);"></div></div>
-            </div>
-            <div class="gauge-row">
-                <div class="gauge-header"><span>Community Engagement</span><span class="gauge-pct">63%</span></div>
-                <div class="gauge-bar"><div class="gauge-fill" style="width:63%;background:var(--ms-yellow);"></div></div>
-            </div>
-            <div style="margin-top:20px;text-align:center;">
-                <button class="btn-primary" style="font-size:13px;padding:10px 20px;">Take the Assessment</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- MEDIA / VIDEO / PODCAST (Suggested Enhancement) -->
-<section class="media-section" id="research">
-    <div class="media-inner">
-        <div class="section-header fade-in">
-            <span class="section-label">Multimedia Resources</span>
-            <h2 class="section-title">Watch, listen, and learn</h2>
-            <p class="section-desc">Suggested addition: a WorkLab-style multimedia hub with video stories, podcast episodes, and webinar replays from education AI leaders.</p>
-        </div>
-        <div class="media-grid">
-            <div class="media-card fade-in">
-                <div class="media-thumb" style="background: linear-gradient(135deg, #002050, #0078D4);">
-                    <span class="media-type-badge">Video</span>
-                    <div class="play-btn"><svg width="20" height="20" viewBox="0 0 16 16"><path d="M6 3l7 5-7 5V3z"/></svg></div>
-                </div>
-                <div class="media-body">
-                    <h3>Reimagine Education 2024 Highlights</h3>
-                    <p>Key sessions from Microsoft's global education summit featuring AI innovation stories.</p>
-                    <div class="media-meta"><span>45 min</span><span>|</span><span>Featured</span></div>
-                </div>
-            </div>
-            <div class="media-card fade-in">
-                <div class="media-thumb" style="background: linear-gradient(135deg, #6B2D8B, #9B59B6);">
-                    <span class="media-type-badge">Webinar</span>
-                    <div class="play-btn"><svg width="20" height="20" viewBox="0 0 16 16"><path d="M6 3l7 5-7 5V3z"/></svg></div>
-                </div>
-                <div class="media-body">
-                    <h3>Information lifecycle in the age of AI</h3>
-                    <p>Gartner analyst Max Goss and Microsoft discuss managing data governance for AI readiness.</p>
-                    <div class="media-meta"><span>38 min</span><span>|</span><span>On Demand</span></div>
-                </div>
-            </div>
-            <div class="media-card fade-in">
-                <div class="media-thumb" style="background: linear-gradient(135deg, #008575, #00B294);">
-                    <span class="media-type-badge">Podcast</span>
-                    <div class="play-btn"><svg width="20" height="20" viewBox="0 0 16 16"><path d="M6 3l7 5-7 5V3z"/></svg></div>
-                </div>
-                <div class="media-body">
-                    <h3>Voices of AI in Education</h3>
-                    <p>Suggested new podcast series featuring educators, IT leaders, and students sharing their AI journeys.</p>
-                    <div class="media-meta"><span>Series</span><span>|</span><span>New</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- COMMUNITY BANNER (Suggested Enhancement) -->
 <div class="community-banner">
     <div class="community-inner fade-in">
@@ -1550,23 +1644,65 @@
             <p>Connect with peers through Microsoft's education programs and share your AI journey.</p>
         </div>
         <div class="community-badges">
-            <a href="#" class="comm-badge">
-                <div class="comm-badge-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-                </div>
-                <div class="comm-badge-label">Showcase Schools</div>
+            <a href="https://elevateforeducators.microsoft.com/" class="comm-badge" style="background:transparent;border:none;padding:0;">
+                <svg width="120" height="140" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="schoolGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#1a1a4e"/>
+                            <stop offset="100%" stop-color="#e07060"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M60 0 L120 25 L120 95 L60 140 L0 95 L0 25 Z" fill="url(#schoolGrad)"/>
+                    <g transform="translate(47,20)">
+                        <rect x="0" y="0" width="12" height="12" fill="#f25022"/>
+                        <rect x="14" y="0" width="12" height="12" fill="#7fba00"/>
+                        <rect x="0" y="14" width="12" height="12" fill="#00a4ef"/>
+                        <rect x="14" y="14" width="12" height="12" fill="#ffb900"/>
+                    </g>
+                    <text x="60" y="58" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="8" font-weight="400" opacity="0.8">Microsoft Elevate</text>
+                    <text x="60" y="78" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="13" font-weight="700">School</text>
+                    <text x="60" y="95" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="10" font-weight="600">Community</text>
+                </svg>
             </a>
-            <a href="#" class="comm-badge">
-                <div class="comm-badge-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </div>
-                <div class="comm-badge-label">Educator Experts</div>
+            <a href="https://elevateforeducators.microsoft.com/" class="comm-badge" style="background:transparent;border:none;padding:0;">
+                <svg width="120" height="140" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="educatorGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#1a1a4e"/>
+                            <stop offset="100%" stop-color="#4a90d9"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M60 0 L120 25 L120 95 L60 140 L0 95 L0 25 Z" fill="url(#educatorGrad)"/>
+                    <g transform="translate(47,20)">
+                        <rect x="0" y="0" width="12" height="12" fill="#f25022"/>
+                        <rect x="14" y="0" width="12" height="12" fill="#7fba00"/>
+                        <rect x="0" y="14" width="12" height="12" fill="#00a4ef"/>
+                        <rect x="14" y="14" width="12" height="12" fill="#ffb900"/>
+                    </g>
+                    <text x="60" y="58" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="8" font-weight="400" opacity="0.8">Microsoft Elevate</text>
+                    <text x="60" y="78" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="13" font-weight="700">Educator</text>
+                    <text x="60" y="95" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="10" font-weight="600">Community</text>
+                </svg>
             </a>
-            <a href="#" class="comm-badge">
-                <div class="comm-badge-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-                </div>
-                <div class="comm-badge-label">Microsoft Learn</div>
+            <a href="https://learn.microsoft.com/en-us/training/educator-center/" class="comm-badge" style="background:transparent;border:none;padding:0;">
+                <svg width="120" height="140" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="learnGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#1a1a4e"/>
+                            <stop offset="100%" stop-color="#2d7d3a"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M60 0 L120 25 L120 95 L60 140 L0 95 L0 25 Z" fill="url(#learnGrad)"/>
+                    <g transform="translate(47,20)">
+                        <rect x="0" y="0" width="12" height="12" fill="#f25022"/>
+                        <rect x="14" y="0" width="12" height="12" fill="#7fba00"/>
+                        <rect x="0" y="14" width="12" height="12" fill="#00a4ef"/>
+                        <rect x="14" y="14" width="12" height="12" fill="#ffb900"/>
+                    </g>
+                    <text x="60" y="58" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="8" font-weight="400" opacity="0.8">Microsoft</text>
+                    <text x="60" y="78" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="13" font-weight="700">Learn</text>
+                    <text x="60" y="95" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="10" font-weight="600">Educator Center</text>
+                </svg>
             </a>
         </div>
     </div>
@@ -1590,7 +1726,6 @@
                 <svg viewBox="0 0 23 23" width="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="11" height="11" fill="#f25022"/><rect x="12" y="0" width="11" height="11" fill="#7fba00"/><rect x="0" y="12" width="11" height="11" fill="#00a4ef"/><rect x="12" y="12" width="11" height="11" fill="#ffb900"/></svg>
                 <strong style="font-size:14px;">Microsoft Education</strong>
             </div>
-            <p>AI Toolkit v4 &mdash; Updated January 2025. A navigator for education institutions to plan their AI journey.</p>
         </div>
         <div class="footer-col">
             <h4>Toolkit</h4>
@@ -1624,7 +1759,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <span>&copy; 2025 Microsoft Corporation. All rights reserved.</span>
+        <span>&copy; 2026 Microsoft Corporation. All rights reserved.</span>
         <div class="footer-legal">
             <a href="#">Privacy</a>
             <a href="#">Terms</a>
@@ -1634,8 +1769,102 @@
     </div>
 </footer>
 
-<!-- SCROLL ANIMATION SCRIPT -->
+<!-- ASSESSMENT + SCROLL ANIMATION SCRIPT -->
 <script>
+    // === ASSESSMENT QUIZ LOGIC ===
+    function toggleAssessment() {
+        const preview = document.getElementById('assessment-preview');
+        const quiz = document.getElementById('assessment-quiz');
+        if (quiz.style.display === 'none') {
+            quiz.style.display = 'block';
+            preview.style.display = 'none';
+        } else {
+            quiz.style.display = 'none';
+            preview.style.display = 'block';
+        }
+    }
+
+    function toggleQuestion(idx) {
+        const headers = document.querySelectorAll('.quiz-header');
+        const bodies = document.querySelectorAll('.quiz-body');
+        headers.forEach((h, i) => {
+            if (i === idx) {
+                const isOpen = h.classList.contains('active');
+                h.classList.toggle('active', !isOpen);
+                bodies[i].style.display = isOpen ? 'none' : 'block';
+            } else {
+                h.classList.remove('active');
+                bodies[i].style.display = 'none';
+            }
+        });
+    }
+
+    function checkProgress() {
+        const answered = document.querySelectorAll('.quiz-accordion input[type="radio"]:checked').length;
+        // Mark answered items
+        for (let i = 0; i < 5; i++) {
+            const selected = document.querySelector('input[name="q' + i + '"]:checked');
+            document.getElementById('qi-' + i).classList.toggle('answered', !!selected);
+        }
+        // Auto-advance to next unanswered question
+        for (let i = 0; i < 5; i++) {
+            if (!document.querySelector('input[name="q' + i + '"]:checked')) {
+                setTimeout(() => toggleQuestion(i), 300);
+                break;
+            }
+        }
+        // Enable submit when all answered
+        const btn = document.getElementById('quiz-submit-btn');
+        btn.disabled = answered < 5;
+        btn.style.opacity = answered < 5 ? '0.5' : '1';
+    }
+
+    function submitAssessment() {
+        const scores = [];
+        const colors = ['var(--ms-blue)', 'var(--ms-purple)', 'var(--ms-teal)', 'var(--ms-green)', 'var(--ms-yellow)'];
+        for (let i = 0; i < 5; i++) {
+            const sel = document.querySelector('input[name="q' + i + '"]:checked');
+            scores.push(sel ? parseInt(sel.value) : 0);
+        }
+        const total = Math.round(scores.reduce((a, b) => a + b, 0) / 5);
+
+        // Switch back to preview with scores
+        document.getElementById('assessment-quiz').style.display = 'none';
+        document.getElementById('assessment-preview').style.display = 'block';
+
+        // Animate bars
+        scores.forEach((s, i) => {
+            document.getElementById('score-' + i).textContent = s + '%';
+            document.getElementById('bar-' + i).style.width = s + '%';
+        });
+
+        // Show result inside quiz area too
+        const resultEl = document.getElementById('quiz-result');
+        resultEl.style.display = 'block';
+        document.getElementById('quiz-total').textContent = total + '%';
+
+        let rec = '';
+        if (total <= 37) rec = 'Your institution is in the early exploration phase. The AI Toolkit can help you build a foundation with governance frameworks and data readiness planning.';
+        else if (total <= 62) rec = 'You have a solid start. Focus on strengthening professional learning and formalizing AI policies to move into pilot implementation.';
+        else if (total <= 87) rec = 'Strong progress. Consider scaling successful pilots and deepening stakeholder engagement to reach full institutional integration.';
+        else rec = 'Your institution is well-positioned to lead. Focus on optimization, peer benchmarking, and building AI agent-supported workflows.';
+        document.getElementById('quiz-recommendation').textContent = rec;
+    }
+
+    // === FEATURED PERSPECTIVE TOGGLE ===
+    function togglePerspective(el) {
+        const expanded = el.nextElementSibling;
+        const chevron = el.querySelector('.read-more-chevron');
+        if (expanded.style.display === 'none') {
+            expanded.style.display = 'block';
+            el.innerHTML = 'Close perspective <svg class="read-more-chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="transform:rotate(90deg)"><path d="M6 3l5 5-5 5V3z"/></svg>';
+        } else {
+            expanded.style.display = 'none';
+            el.innerHTML = 'Read the full perspective <svg class="read-more-chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg>';
+        }
+    }
+
+    // === SCROLL ANIMATIONS ===
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
