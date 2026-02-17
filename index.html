@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Education AI Toolkit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1a1a1a;
+            background: #fff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        /* ===== COLOR TOKENS (Microsoft Education) ===== */
+        :root {
+            --ms-blue: #0067B8;
+            --ms-dark-blue: #002050;
+            --ms-light-blue: #D4E9F7;
+            --ms-accent-blue: #0078D4;
+            --ms-purple: #6B2D8B;
+            --ms-teal: #008575;
+            --ms-yellow: #FFB900;
+            --ms-yellow-soft: #FFF4CE;
+            --ms-green: #107C10;
+            --ms-green-soft: #E6F7E6;
+            --ms-gray-100: #F5F5F5;
+            --ms-gray-200: #E8E8E8;
+            --ms-gray-500: #6E6E6E;
+            --ms-gray-800: #2D2D2D;
+            --hero-gradient: linear-gradient(135deg, #002050 0%, #0067B8 50%, #6B2D8B 100%);
+        }
+
+        /* ===== TOP BANNER ===== */
+        .top-banner {
+            background: var(--ms-dark-blue);
+            color: #fff;
+            text-align: center;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+        .top-banner a { color: var(--ms-yellow); font-weight: 600; }
+        .top-banner a:hover { text-decoration: underline; }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--ms-gray-200);
+            padding: 0 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+        .nav-left { display: flex; align-items: center; gap: 32px; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; }
+        .nav-logo svg { height: 20px; }
+        .nav-logo span { font-size: 14px; color: var(--ms-gray-500); font-weight: 400; }
+        .nav-logo strong { color: var(--ms-gray-800); font-weight: 600; }
+        .nav-links { display: flex; gap: 4px; }
+        .nav-links a {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ms-gray-800);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover { background: var(--ms-gray-100); color: var(--ms-blue); }
+        .nav-links a.active { color: var(--ms-blue); border-bottom: 2px solid var(--ms-blue); border-radius: 0; }
+        .nav-cta {
+            background: var(--ms-blue);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-cta:hover { background: #005a9e; }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: var(--hero-gradient);
+            color: #fff;
+            padding: 100px 48px 80px;
+            position: relative;
+            overflow: hidden;
+            min-height: 580px;
+            display: flex;
+            align-items: center;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            right: 200px;
+            width: 500px;
+            height: 500px;
+            background: rgba(107,45,139,0.3);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+        .hero-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content {}
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--ms-yellow);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.08;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--ms-yellow), #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-size: 19px;
+            line-height: 1.55;
+            opacity: 0.9;
+            margin-bottom: 36px;
+            max-width: 520px;
+            font-weight: 300;
+        }
+        .hero-actions { display: flex; gap: 16px; align-items: center; }
+        .btn-primary {
+            background: #fff;
+            color: var(--ms-dark-blue);
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover { background: var(--ms-yellow); color: var(--ms-dark-blue); }
+        .btn-secondary {
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            cursor: pointer;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+        }
+        .hero-visual-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+        }
+        .hero-stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .hero-stat {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .hero-stat-num {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--ms-yellow);
+            display: block;
+        }
+        .hero-stat-label {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        /* ===== SECTION LAYOUTS ===== */
+        .section { padding: 80px 48px; max-width: 1280px; margin: 0 auto; }
+        .section-full { padding: 80px 48px; }
+        .section-gray { background: var(--ms-gray-100); }
+        .section-dark { background: var(--ms-dark-blue); color: #fff; }
+        .section-header { margin-bottom: 48px; }
+        .section-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--ms-blue);
+            margin-bottom: 12px;
+        }
+        .section-dark .section-label { color: var(--ms-yellow); }
+        .section-title {
+            font-size: 38px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--ms-dark-blue);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .section-dark .section-title { color: #fff; }
+        .section-desc {
+            font-size: 17px;
+            color: var(--ms-gray-500);
+            max-width: 680px;
+            line-height: 1.6;
+        }
+        .section-dark .section-desc { color: rgba(255,255,255,0.7); }
+
+        /* ===== FEATURED INSIGHT (WorkLab-style) ===== */
+        .featured {
+            padding: 80px 48px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+        }
+        .featured-main {
+            background: linear-gradient(160deg, #002050, #0067B8);
+            border-radius: 16px;
+            overflow: hidden;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 480px;
+            padding: 40px;
+            position: relative;
+        }
+        .featured-main::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,32,80,0.95) 30%, transparent 70%);
+        }
+        .featured-main > * { position: relative; z-index: 2; }
+        .featured-tag {
+            display: inline-block;
+            background: var(--ms-yellow);
+            color: var(--ms-dark-blue);
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 16px;
+        }
+        .featured-main h2 {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+        .featured-main p {
+            font-size: 15px;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+        .featured-main .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ms-yellow);
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 20px;
+            transition: gap 0.2s;
+        }
+        .featured-main .read-more:hover { gap: 10px; }
+        .featured-side { display: flex; flex-direction: column; gap: 16px; }
+        .featured-card {
+            background: #fff;
+            border: 1px solid var(--ms-gray-200);
+            border-radius: 12px;
+            padding: 28px;
+            flex: 1;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .featured-card:hover {
+            border-color: var(--ms-blue);
+            box-shadow: 0 8px 32px rgba(0,103,184,0.1);
+            transform: translateY(-2px);
+        }
+        .featured-card-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--ms-purple);
+            margin-bottom: 10px;
+        }
+        .featured-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--ms-dark-blue);
+            margin-bottom: 8px;
+        }
+        .featured-card p {
+            font-size: 14px;
+            color: var(--ms-gray-500);
+            line-height: 1.5;
+        }
+
+        /* ===== DATA CALLOUT BAR ===== */
+        .data-bar {
+            background: var(--ms-dark-blue);
+            padding: 48px;
+        }
+        .data-bar-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+        .data-item {}
+        .data-num {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--ms-yellow);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .data-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.4;
+        }
+
+        /* ===== NAVIGATOR CARDS ===== */
+        .nav-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .pillar-card {
+            border-radius: 12px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+        .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+        .pillar-card.student {
+            background: linear-gradient(160deg, #E3F5FF, #D4E9F7);
+            border: 1px solid rgba(0,103,184,0.15);
+        }
+        .pillar-card.institution {
+            background: linear-gradient(160deg, #F0E6F6, #E8D5F5);
+            border: 1px solid rgba(107,45,139,0.15);
+        }
+        .pillar-card.it {
+            background: linear-gradient(160deg, #E6F7F0, #D1F0E0);
+            border: 1px solid rgba(0,133,117,0.15);
+        }
+        .pillar-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        .student .pillar-icon { background: rgba(0,103,184,0.12); color: var(--ms-blue); }
+        .institution .pillar-icon { background: rgba(107,45,139,0.12); color: var(--ms-purple); }
+        .it .pillar-icon { background: rgba(0,133,117,0.12); color: var(--ms-teal); }
+        .pillar-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--ms-dark-blue);
+        }
+        .pillar-card p {
+            font-size: 15px;
+            color: var(--ms-gray-500);
+            line-height: 1.6;
+            flex: 1;
+        }
+        .pillar-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: gap 0.2s;
+        }
+        .student .pillar-link { color: var(--ms-blue); }
+        .institution .pillar-link { color: var(--ms-purple); }
+        .it .pillar-link { color: var(--ms-teal); }
+        .pillar-link:hover { gap: 10px; }
+
+        /* ===== 5-STEP IMPLEMENTATION ===== */
+        .steps-container {
+            display: flex;
+            gap: 0;
+            position: relative;
+        }
+        .step-item {
+            flex: 1;
+            text-align: center;
+            padding: 32px 20px;
+            position: relative;
+        }
+        .step-num-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            position: relative;
+            z-index: 2;
+        }
+        .step-item:nth-child(1) .step-num-wrap { background: var(--ms-blue); }
+        .step-item:nth-child(2) .step-num-wrap { background: var(--ms-purple); }
+        .step-item:nth-child(3) .step-num-wrap { background: var(--ms-teal); }
+        .step-item:nth-child(4) .step-num-wrap { background: var(--ms-yellow); }
+        .step-item:nth-child(5) .step-num-wrap { background: var(--ms-green); }
+        .step-num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .step-item:nth-child(4) .step-num { color: var(--ms-dark-blue); }
+        .step-item h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ms-dark-blue);
+            margin-bottom: 8px;
+        }
+        .step-item p {
+            font-size: 13px;
+            color: var(--ms-gray-500);
+            line-height: 1.5;
+        }
+        .step-connector {
+            position: absolute;
+            top: 63px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--ms-gray-200);
+            z-index: 1;
+        }
+
+        /* ===== CASE STUDIES / AI NAVIGATOR STORIES ===== */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .story-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--ms-gray-200);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .story-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+        .story-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .story-tag {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(0,32,80,0.9);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .story-body { padding: 24px; }
+        .story-org {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ms-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .story-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--ms-dark-blue);
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+        .story-card p {
+            font-size: 14px;
+            color: var(--ms-gray-500);
+            line-height: 1.5;
+        }
+        .story-quote {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--ms-gray-200);
+            font-size: 13px;
+            font-style: italic;
+            color: var(--ms-gray-500);
+            line-height: 1.5;
+        }
+        .story-quote-author {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--ms-blue);
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* ===== TOOLS GRID ===== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .tool-card {
+            background: #fff;
+            border: 1px solid var(--ms-gray-200);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+        .tool-card:nth-child(1)::before { background: var(--ms-blue); }
+        .tool-card:nth-child(2)::before { background: var(--ms-purple); }
+        .tool-card:nth-child(3)::before { background: var(--ms-teal); }
+        .tool-card:nth-child(4)::before { background: var(--ms-yellow); }
+        .tool-card:nth-child(5)::before { background: var(--ms-green); }
+        .tool-card:nth-child(6)::before { background: #E74856; }
+        .tool-card:nth-child(7)::before { background: var(--ms-blue); }
+        .tool-card:nth-child(8)::before { background: var(--ms-purple); }
+        .tool-card:hover {
+            border-color: var(--ms-blue);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        .tool-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--ms-gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 22px;
+        }
+        .tool-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ms-dark-blue);
+            margin-bottom: 8px;
+        }
+        .tool-card p {
+            font-size: 13px;
+            color: var(--ms-gray-500);
+            line-height: 1.5;
+        }
+        .tool-tier {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 3px;
+        }
+        .tier-free { background: var(--ms-green-soft); color: var(--ms-green); }
+        .tier-paid { background: var(--ms-light-blue); color: var(--ms-blue); }
+        .tier-build { background: #F0E6F6; color: var(--ms-purple); }
+
+        /* ===== PHASES SECTION ===== */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .phase-card {
+            border-radius: 16px;
+            padding: 36px;
+            position: relative;
+        }
+        .phase-card:nth-child(1) {
+            background: linear-gradient(160deg, #E3F5FF, #f0f8ff);
+            border: 1px solid rgba(0,103,184,0.12);
+        }
+        .phase-card:nth-child(2) {
+            background: linear-gradient(160deg, #F0E6F6, #f8f0fc);
+            border: 1px solid rgba(107,45,139,0.12);
+        }
+        .phase-card:nth-child(3) {
+            background: linear-gradient(160deg, #E6F7F0, #f0fcf6);
+            border: 1px solid rgba(0,133,117,0.12);
+        }
+        .phase-num {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .phase-card:nth-child(1) .phase-num { color: var(--ms-blue); }
+        .phase-card:nth-child(2) .phase-num { color: var(--ms-purple); }
+        .phase-card:nth-child(3) .phase-num { color: var(--ms-teal); }
+        .phase-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ms-dark-blue);
+            margin-bottom: 12px;
+        }
+        .phase-card p {
+            font-size: 14px;
+            color: var(--ms-gray-500);
+            line-height: 1.6;
+        }
+
+        /* ===== AI READINESS ASSESSMENT (Suggested Add-on) ===== */
+        .assessment-section {
+            background: linear-gradient(135deg, #002050 0%, #003380 100%);
+            padding: 80px 48px;
+            color: #fff;
+        }
+        .assessment-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        .assessment-content h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .assessment-content p {
+            font-size: 17px;
+            opacity: 0.85;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        .assessment-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .assessment-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .assessment-features li::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            background: var(--ms-yellow);
+            color: var(--ms-dark-blue);
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .assessment-visual {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 36px;
+        }
+        .gauge-label { font-size: 14px; opacity: 0.7; margin-bottom: 12px; }
+        .gauge-bar {
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .gauge-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1.5s ease;
+        }
+        .gauge-row { margin-bottom: 20px; }
+        .gauge-row:last-child { margin-bottom: 0; }
+        .gauge-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        .gauge-pct { color: var(--ms-yellow); font-weight: 600; }
+
+        /* ===== PODCAST / VIDEO SECTION (Suggested Add-on) ===== */
+        .media-section {
+            padding: 80px 48px;
+            background: var(--ms-gray-100);
+        }
+        .media-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .media-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--ms-gray-200);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .media-card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        .media-thumb {
+            height: 180px;
+            background: linear-gradient(135deg, var(--ms-dark-blue), var(--ms-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .play-btn {
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,0.4);
+            transition: all 0.3s;
+        }
+        .media-card:hover .play-btn { background: var(--ms-yellow); border-color: var(--ms-yellow); }
+        .play-btn svg { fill: #fff; margin-left: 3px; }
+        .media-card:hover .play-btn svg { fill: var(--ms-dark-blue); }
+        .media-type-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .media-body { padding: 24px; }
+        .media-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--ms-dark-blue);
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        .media-card p {
+            font-size: 14px;
+            color: var(--ms-gray-500);
+            line-height: 1.5;
+        }
+        .media-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--ms-gray-500);
+        }
+
+        /* ===== NEWSLETTER / CTA ===== */
+        .cta-section {
+            padding: 80px 48px;
+            background: #fff;
+        }
+        .cta-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .cta-inner h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--ms-dark-blue);
+            margin-bottom: 16px;
+        }
+        .cta-inner p {
+            font-size: 17px;
+            color: var(--ms-gray-500);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .cta-form {
+            display: flex;
+            gap: 12px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .cta-input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1.5px solid var(--ms-gray-200);
+            border-radius: 4px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .cta-input:focus { outline: none; border-color: var(--ms-blue); }
+        .cta-submit {
+            background: var(--ms-blue);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        .cta-submit:hover { background: #005a9e; }
+
+        /* ===== COMMUNITY BANNER (Suggested Add-on) ===== */
+        .community-banner {
+            background: linear-gradient(90deg, var(--ms-purple), var(--ms-blue));
+            padding: 48px;
+            color: #fff;
+        }
+        .community-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .community-inner h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .community-inner p {
+            font-size: 15px;
+            opacity: 0.85;
+        }
+        .community-badges {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .comm-badge {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 16px 24px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .comm-badge:hover { background: rgba(255,255,255,0.25); }
+        .comm-badge-icon { font-size: 28px; margin-bottom: 4px; }
+        .comm-badge-label { font-size: 12px; font-weight: 600; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--ms-gray-100);
+            border-top: 1px solid var(--ms-gray-200);
+            padding: 48px;
+        }
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr repeat(4, 1fr);
+            gap: 40px;
+        }
+        .footer-brand p {
+            font-size: 13px;
+            color: var(--ms-gray-500);
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+        .footer-col h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--ms-dark-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 16px;
+        }
+        .footer-col a {
+            display: block;
+            font-size: 13px;
+            color: var(--ms-gray-500);
+            padding: 4px 0;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--ms-blue); }
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 24px;
+            margin-top: 32px;
+            border-top: 1px solid var(--ms-gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--ms-gray-500);
+        }
+        .footer-legal a { margin-left: 16px; }
+        .footer-legal a:hover { color: var(--ms-blue); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-visual { display: none; }
+            .hero h1 { font-size: 42px; }
+            .featured-grid { grid-template-columns: 1fr; }
+            .nav-pillars { grid-template-columns: 1fr; }
+            .stories-grid { grid-template-columns: 1fr 1fr; }
+            .tools-grid { grid-template-columns: 1fr 1fr; }
+            .data-bar-inner { grid-template-columns: 1fr 1fr; }
+            .assessment-inner { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .section, .section-full, .featured { padding: 48px 20px; }
+            .hero { padding: 60px 20px; }
+            .hero h1 { font-size: 32px; }
+            .stories-grid { grid-template-columns: 1fr; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .steps-container { flex-direction: column; }
+            .data-bar-inner { grid-template-columns: 1fr; gap: 24px; }
+            .community-inner { flex-direction: column; gap: 24px; text-align: center; }
+            .cta-form { flex-direction: column; }
+            .media-grid { grid-template-columns: 1fr; }
+            .phases-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BANNER -->
+<div class="top-banner">
+    New: Microsoft Education AI Toolkit v4 is here &mdash; <a href="https://aka.ms/eduaitoolkit">Download the full guide</a>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+    <div class="nav-left">
+        <a href="#" class="nav-logo">
+            <svg viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="11" height="11" fill="#f25022"/><rect x="12" y="0" width="11" height="11" fill="#7fba00"/><rect x="0" y="12" width="11" height="11" fill="#00a4ef"/><rect x="12" y="12" width="11" height="11" fill="#ffb900"/></svg>
+            <span><strong>Microsoft</strong> Education AI Toolkit</span>
+        </a>
+        <div class="nav-links">
+            <a href="#overview" class="active">Overview</a>
+            <a href="#navigators">AI Navigators</a>
+            <a href="#plan">Plan</a>
+            <a href="#implement">Implement</a>
+            <a href="#research">Research</a>
+        </div>
+    </div>
+    <a href="https://aka.ms/eduaitoolkit" class="nav-cta" style="text-decoration:none;">Download Toolkit</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="overview">
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                UPDATED JANUARY 2026
+            </div>
+            <h1>Navigate your institution's <em>AI journey</em></h1>
+            <p class="hero-sub">A comprehensive guide for education leaders to plan, implement, and scale responsible AI across every level of their institution.</p>
+            <div class="hero-actions">
+                <a href="https://aka.ms/eduaitoolkit" class="btn-primary" style="text-decoration:none;">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 12l-4-4h2.5V2h3v6H12L8 12zm-6 2h12v1.5H2V14z"/></svg>
+                    Download the Toolkit
+                </a>
+                <button class="btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3.5v9l7-4.5-7-4.5z"/></svg>
+                    Watch Overview
+                </button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-visual-card">
+                <div class="hero-stat-grid">
+                    <div class="hero-stat">
+                        <span class="hero-stat-num">82%</span>
+                        <span class="hero-stat-label">of leaders view 2025 as pivotal for AI strategy</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-num">53%</span>
+                        <span class="hero-stat-label">of workers lack sufficient capacity for their work</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-num">71%</span>
+                        <span class="hero-stat-label">of Frontier Firm leaders say companies are thriving</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-num">$4B</span>
+                        <span class="hero-stat-label">Microsoft Elevate investment in education</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DATA CALLOUT BAR -->
+<div class="data-bar">
+    <div class="data-bar-inner">
+        <div class="data-item fade-in">
+            <div class="data-num">5</div>
+            <div class="data-label">Sections covering every stage of AI adoption</div>
+        </div>
+        <div class="data-item fade-in">
+            <div class="data-num">15+</div>
+            <div class="data-label">Global institution case studies</div>
+        </div>
+        <div class="data-item fade-in">
+            <div class="data-num">3</div>
+            <div class="data-label">AI Navigator pathways for different roles</div>
+        </div>
+        <div class="data-item fade-in">
+            <div class="data-num">115</div>
+            <div class="data-label">Pages of actionable frameworks &amp; guidance</div>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURED INSIGHT -->
+<div class="featured">
+    <div class="section-header fade-in">
+        <span class="section-label">Featured Insight</span>
+        <h2 class="section-title">The frontier moment in education</h2>
+    </div>
+    <div class="featured-grid">
+        <div class="featured-main fade-in">
+            <span class="featured-tag">Leadership Perspective</span>
+            <h2>Guiding education with responsible AI innovation</h2>
+            <p>AI stands at an inflection point where generative AI fundamentally reimagines how we research, learn, and grow. This moment calls for both excitement and responsibility.</p>
+            <a href="#" class="read-more">Read the full perspective <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
+        </div>
+        <div class="featured-side">
+            <div class="featured-card fade-in">
+                <div class="featured-card-tag">Data Insight</div>
+                <h3>How AI expands educational capacity</h3>
+                <p>AI systems change the dynamic by making certain forms of assistance more readily available when designed and governed responsibly.</p>
+            </div>
+            <div class="featured-card fade-in">
+                <div class="featured-card-tag">Workforce</div>
+                <h3>AI and the future of work in education</h3>
+                <p>AI is reshaping skills requirements, demanding a mix of technical abilities and durable skills like critical thinking and emotional intelligence.</p>
+            </div>
+            <div class="featured-card fade-in">
+                <div class="featured-card-tag">Agentic AI</div>
+                <h3>Building and deploying AI agents for education</h3>
+                <p>Intelligent agents that can independently plan and act toward goals are becoming central to institutional AI strategies.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- THREE PHASES -->
+<section class="section-full section-gray" id="plan">
+    <div class="section" style="padding-top:0;padding-bottom:0;">
+        <div class="section-header fade-in">
+            <span class="section-label">AI Integration Phases</span>
+            <h2 class="section-title">Three phases of AI adoption in education</h2>
+            <p class="section-desc">Institutions move through overlapping phases, with progress varying by function and role. What matters most is intentional adoption aligned to institutional values.</p>
+        </div>
+        <div class="phases-grid">
+            <div class="phase-card fade-in">
+                <div class="phase-num">Phase 1</div>
+                <h3>Human-led work with AI assistance</h3>
+                <p>Educators and staff use AI tools to support everyday tasks like drafting communications or generating lesson ideas. Work remains human-directed, with AI assisting in efficiency and preparation.</p>
+            </div>
+            <div class="phase-card fade-in">
+                <div class="phase-num">Phase 2</div>
+                <h3>Human-guided, agent-supported teams</h3>
+                <p>AI systems take on defined, narrow responsibilities. An AI-supported service may respond to common student inquiries and escalate complex cases to staff for review.</p>
+            </div>
+            <div class="phase-card fade-in">
+                <div class="phase-num">Phase 3</div>
+                <h3>Human-directed, agent-operated workflows</h3>
+                <p>Educators define goals and parameters while AI systems execute portions of workflows under clear governance. High-stakes decisions remain human responsibilities.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI NAVIGATOR PILLARS -->
+<section class="section" id="navigators">
+    <div class="section-header fade-in">
+        <span class="section-label">AI Navigators</span>
+        <h2 class="section-title">Chart your AI roadmap through real-world stories</h2>
+        <p class="section-desc">Learn from institutions leading the way with research, experimentation, and deployment of AI solutions in education across the globe.</p>
+    </div>
+    <div class="nav-pillars">
+        <div class="pillar-card student fade-in">
+            <div class="pillar-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <h3>Student Success</h3>
+            <p>Advance student success with AI-powered tools that support learning at every stage. Personalize learning, provide 24/7 tutoring, and prepare students through skills-based pathways.</p>
+            <a href="#" class="pillar-link">Explore 8 stories <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
+        </div>
+        <div class="pillar-card institution fade-in">
+            <div class="pillar-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+            </div>
+            <h3>Institutional Innovation</h3>
+            <p>Drive institutional innovation, streamline operations, and improve efficiency with AI-powered insights and automation that modernize infrastructure.</p>
+            <a href="#" class="pillar-link">Explore 5 stories <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
+        </div>
+        <div class="pillar-card it fade-in">
+            <div class="pillar-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <h3>Simplify &amp; Secure IT</h3>
+            <p>Simplify and secure IT management with AI-powered protection. A unified, integrated tech stack that simplifies operations and safeguards learning environments.</p>
+            <a href="#" class="pillar-link">Explore 2 stories <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5V3z"/></svg></a>
+        </div>
+    </div>
+</section>
+
+<!-- CASE STUDY STORIES -->
+<section class="section-full section-gray">
+    <div class="section" style="padding-top:0;padding-bottom:0;">
+        <div class="section-header fade-in">
+            <span class="section-label">Global Case Studies</span>
+            <h2 class="section-title">How institutions are leading with AI</h2>
+        </div>
+        <div class="stories-grid">
+            <div class="story-card fade-in">
+                <div class="story-img" style="background: linear-gradient(135deg, #1a3a5c, #2a6496); display:flex; align-items:center; justify-content:center;">
+                    <span style="font-size:48px;opacity:0.3;">NYC</span>
+                </div>
+                <div class="story-body">
+                    <div class="story-org">New York City Public Schools</div>
+                    <h3>A custom AI teaching assistant that multiplies educator effectiveness</h3>
+                    <p>District IT leaders partnered with Microsoft to create a data hub of close to 2 billion records for a custom-built AI tool with Microsoft Foundry.</p>
+                </div>
+            </div>
+            <div class="story-card fade-in">
+                <div class="story-img" style="background: linear-gradient(135deg, #2d5016, #4a7c28); display:flex; align-items:center; justify-content:center;">
+                    <span style="font-size:28px;opacity:0.3;">Auburn</span>
+                </div>
+                <div class="story-body">
+                    <div class="story-org">Auburn University</div>
+                    <h3>Building a culture of innovation through responsible AI use</h3>
+                    <p>Auburn integrated Copilot Chat and Azure OpenAI into its academic framework, fostering a campus-wide culture of AI literacy.</p>
+                </div>
+            </div>
+            <div class="story-card fade-in">
+                <div class="story-img" style="background: linear-gradient(135deg, #5c1a1a, #964a2a); display:flex; align-items:center; justify-content:center;">
+                    <span style="font-size:24px;opacity:0.3;">Oregon State</span>
+                </div>
+                <div class="story-body">
+                    <div class="story-org">Oregon State University</div>
+                    <h3>Reducing incident response from weeks to minutes</h3>
+                    <p>OSU implemented Security Copilot, Microsoft Sentinel, and Microsoft Defender to transform their cybersecurity posture.</p>
+                </div>
+            </div>
+            <div class="story-card fade-in">
+                <div class="story-img" style="background: linear-gradient(135deg, #1a3a5c, #6B2D8B); display:flex; align-items:center; justify-content:center;">
+                    <span style="font-size:20px;opacity:0.3;">Tec de Monterrey</span>
+                </div>
+                <div class="story-body">
+                    <div class="story-org">Tecnologico de Monterrey</div>
+                    <h3>TECgpt: Latin America's first generative AI-powered education ecosystem</h3>
+                    <p>Built on Azure OpenAI, TECgpt personalizes learning, boosts educator creativity, and saves time on administrative tasks.</p>
+                </div>
+            </div>
+            <div class="story-card fade-in">
+                <div class="story-img" style="background: linear-gradient(135deg, #003366, #0078D4); display:flex; align-items:center; justify-content:center;">
+                    <span style="font-size:18px;opacity:0.3;">Univ. of Sydney</span>
+                </div>
+                <div class="story-body">
+                    <div class="story-org">University of Sydney</div>
+                    <h3>Cogniti: A secure AI assistant built by educators, for educators</h3>
+                    <p>A custom AI assistant on Azure that ensures prompts and responses remain confidential while empowering personalized teaching.</p>
+                </div>
+            </div>
+            <div class="story-card fade-in">
+                <div class="story-img" style="background: linear-gradient(135deg, #1a5c3a, #28964a); display:flex; align-items:center; justify-content:center;">
+                    <span style="font-size:20px;opacity:0.3;">Wichita PS</span>
+                </div>
+                <div class="story-body">
+                    <div class="story-org">Wichita Public Schools</div>
+                    <h3>Copilot Chat makes learning accessible across 100+ languages</h3>
+                    <p>With nearly 50,000 students and 100+ languages spoken, Wichita's IT team led an early adoption program of Copilot Chat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5-STEP IMPLEMENTATION -->
+<section class="section" id="implement">
+    <div class="section-header fade-in">
+        <span class="section-label">Implementation Roadmap</span>
+        <h2 class="section-title">AI implementation in five steps</h2>
+        <p class="section-desc">A practical framework for education leaders to move from exploration to measurable impact.</p>
+    </div>
+    <div class="steps-container fade-in" style="position:relative;">
+        <div class="step-connector"></div>
+        <div class="step-item">
+            <div class="step-num-wrap"><span class="step-num">1</span></div>
+            <h4>Exploration &amp; Planning</h4>
+            <p>Engage your community, define your goals, and identify educational outcomes AI can enhance.</p>
+        </div>
+        <div class="step-item">
+            <div class="step-num-wrap"><span class="step-num">2</span></div>
+            <h4>Data &amp; Infrastructure</h4>
+            <p>Strengthen governance, break down data silos, and prepare your infrastructure for AI readiness.</p>
+        </div>
+        <div class="step-item">
+            <div class="step-num-wrap"><span class="step-num">3</span></div>
+            <h4>Pilot Implementation</h4>
+            <p>Offer professional learning, run a controlled pilot, and gather feedback from educators and staff.</p>
+        </div>
+        <div class="step-item">
+            <div class="step-num-wrap"><span class="step-num">4</span></div>
+            <h4>Scale &amp; Optimize</h4>
+            <p>Introduce AI-driven administration tools, expand successful pilots, and refine based on feedback.</p>
+        </div>
+        <div class="step-item">
+            <div class="step-num-wrap"><span class="step-num">5</span></div>
+            <h4>Evaluate &amp; Review</h4>
+            <p>Assess impact against goals, monitor AI's influence on outcomes, and iterate based on results.</p>
+        </div>
+    </div>
+</section>
+
+<!-- TOOLS GRID -->
+<section class="section-full section-gray">
+    <div class="section" style="padding-top:0;padding-bottom:0;">
+        <div class="section-header fade-in">
+            <span class="section-label">Microsoft AI Tools</span>
+            <h2 class="section-title">Creating AI-powered experiences</h2>
+            <p class="section-desc">From free tools to build-your-own solutions, Microsoft provides a full spectrum of AI capabilities for education.</p>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card fade-in">
+                <div class="tool-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0078D4" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                </div>
+                <h4>Copilot Chat</h4>
+                <p>AI chat for the web with enterprise data protection at no additional cost.</p>
+                <span class="tool-tier tier-free">Free</span>
+            </div>
+            <div class="tool-card fade-in">
+                <div class="tool-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B2D8B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h4>Microsoft 365 Copilot</h4>
+                <p>Works alongside you in Word, Excel, PowerPoint, Outlook, and Teams.</p>
+                <span class="tool-tier tier-paid">Licensed</span>
+            </div>
+            <div class="tool-card fade-in">
+                <div class="tool-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#008575" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h4>Security Copilot</h4>
+                <p>AI-powered security for threat hunting, incident response, and posture management.</p>
+                <span class="tool-tier tier-paid">Licensed</span>
+            </div>
+            <div class="tool-card fade-in">
+                <div class="tool-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFB900" stroke-width="2"><path d="M16 18l2-2-2-2M8 18l-2-2 2-2M14 4l-4 16"/></svg>
+                </div>
+                <h4>GitHub Copilot</h4>
+                <p>AI coding assistant that helps write code faster and supports computer science instruction.</p>
+                <span class="tool-tier tier-free">Free for Edu</span>
+            </div>
+            <div class="tool-card fade-in">
+                <div class="tool-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#107C10" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                </div>
+                <h4>Learning Accelerators</h4>
+                <p>AI-powered tools that boost student learning with real-time feedback and practice.</p>
+                <span class="tool-tier tier-free">Free</span>
+            </div>
+            <div class="tool-card fade-in">
+                <div class="tool-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E74856" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
+                <h4>Teams for Education</h4>
+                <p>Collaborative classroom environment with AI-powered meeting recaps and insights.</p>
+                <span class="tool-tier tier-free">Free</span>
+            </div>
+            <div class="tool-card fade-in">
+                <div class="tool-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0078D4" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h4>Copilot Studio</h4>
+                <p>Low-code platform to build, customize, and deploy your own AI copilots.</p>
+                <span class="tool-tier tier-build">Build Your Own</span>
+            </div>
+            <div class="tool-card fade-in">
+                <div class="tool-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B2D8B" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                </div>
+                <h4>Microsoft Foundry</h4>
+                <p>Full environment for building, testing, and managing custom AI agents at scale.</p>
+                <span class="tool-tier tier-build">Build Your Own</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI READINESS ASSESSMENT (Suggested Enhancement) -->
+<section class="assessment-section">
+    <div class="assessment-inner">
+        <div class="assessment-content fade-in">
+            <span class="section-label" style="color:var(--ms-yellow);">Suggested Enhancement</span>
+            <h2>Interactive AI Readiness Assessment</h2>
+            <p>An embedded self-assessment tool that helps education leaders gauge where their institution stands across key AI adoption dimensions, then maps a personalized next-steps pathway.</p>
+            <ul class="assessment-features">
+                <li>Data infrastructure &amp; governance maturity scoring</li>
+                <li>Professional development readiness benchmarking</li>
+                <li>Policy &amp; compliance gap identification</li>
+                <li>Personalized resource recommendations by role</li>
+                <li>Peer benchmarking against similar institutions</li>
+            </ul>
+        </div>
+        <div class="assessment-visual fade-in">
+            <div style="font-size:18px;font-weight:700;margin-bottom:24px;">Your AI Readiness Score</div>
+            <div class="gauge-row">
+                <div class="gauge-header"><span>Data Infrastructure</span><span class="gauge-pct">72%</span></div>
+                <div class="gauge-bar"><div class="gauge-fill" style="width:72%;background:var(--ms-blue);"></div></div>
+            </div>
+            <div class="gauge-row">
+                <div class="gauge-header"><span>Governance &amp; Policy</span><span class="gauge-pct">58%</span></div>
+                <div class="gauge-bar"><div class="gauge-fill" style="width:58%;background:var(--ms-purple);"></div></div>
+            </div>
+            <div class="gauge-row">
+                <div class="gauge-header"><span>Professional Learning</span><span class="gauge-pct">45%</span></div>
+                <div class="gauge-bar"><div class="gauge-fill" style="width:45%;background:var(--ms-teal);"></div></div>
+            </div>
+            <div class="gauge-row">
+                <div class="gauge-header"><span>Security Readiness</span><span class="gauge-pct">81%</span></div>
+                <div class="gauge-bar"><div class="gauge-fill" style="width:81%;background:var(--ms-green);"></div></div>
+            </div>
+            <div class="gauge-row">
+                <div class="gauge-header"><span>Community Engagement</span><span class="gauge-pct">63%</span></div>
+                <div class="gauge-bar"><div class="gauge-fill" style="width:63%;background:var(--ms-yellow);"></div></div>
+            </div>
+            <div style="margin-top:20px;text-align:center;">
+                <button class="btn-primary" style="font-size:13px;padding:10px 20px;">Take the Assessment</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MEDIA / VIDEO / PODCAST (Suggested Enhancement) -->
+<section class="media-section" id="research">
+    <div class="media-inner">
+        <div class="section-header fade-in">
+            <span class="section-label">Multimedia Resources</span>
+            <h2 class="section-title">Watch, listen, and learn</h2>
+            <p class="section-desc">Suggested addition: a WorkLab-style multimedia hub with video stories, podcast episodes, and webinar replays from education AI leaders.</p>
+        </div>
+        <div class="media-grid">
+            <div class="media-card fade-in">
+                <div class="media-thumb" style="background: linear-gradient(135deg, #002050, #0078D4);">
+                    <span class="media-type-badge">Video</span>
+                    <div class="play-btn"><svg width="20" height="20" viewBox="0 0 16 16"><path d="M6 3l7 5-7 5V3z"/></svg></div>
+                </div>
+                <div class="media-body">
+                    <h3>Reimagine Education 2024 Highlights</h3>
+                    <p>Key sessions from Microsoft's global education summit featuring AI innovation stories.</p>
+                    <div class="media-meta"><span>45 min</span><span>|</span><span>Featured</span></div>
+                </div>
+            </div>
+            <div class="media-card fade-in">
+                <div class="media-thumb" style="background: linear-gradient(135deg, #6B2D8B, #9B59B6);">
+                    <span class="media-type-badge">Webinar</span>
+                    <div class="play-btn"><svg width="20" height="20" viewBox="0 0 16 16"><path d="M6 3l7 5-7 5V3z"/></svg></div>
+                </div>
+                <div class="media-body">
+                    <h3>Information lifecycle in the age of AI</h3>
+                    <p>Gartner analyst Max Goss and Microsoft discuss managing data governance for AI readiness.</p>
+                    <div class="media-meta"><span>38 min</span><span>|</span><span>On Demand</span></div>
+                </div>
+            </div>
+            <div class="media-card fade-in">
+                <div class="media-thumb" style="background: linear-gradient(135deg, #008575, #00B294);">
+                    <span class="media-type-badge">Podcast</span>
+                    <div class="play-btn"><svg width="20" height="20" viewBox="0 0 16 16"><path d="M6 3l7 5-7 5V3z"/></svg></div>
+                </div>
+                <div class="media-body">
+                    <h3>Voices of AI in Education</h3>
+                    <p>Suggested new podcast series featuring educators, IT leaders, and students sharing their AI journeys.</p>
+                    <div class="media-meta"><span>Series</span><span>|</span><span>New</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMMUNITY BANNER (Suggested Enhancement) -->
+<div class="community-banner">
+    <div class="community-inner fade-in">
+        <div>
+            <h3>Join a global community of innovative educators</h3>
+            <p>Connect with peers through Microsoft's education programs and share your AI journey.</p>
+        </div>
+        <div class="community-badges">
+            <a href="#" class="comm-badge">
+                <div class="comm-badge-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <div class="comm-badge-label">Showcase Schools</div>
+            </a>
+            <a href="#" class="comm-badge">
+                <div class="comm-badge-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="comm-badge-label">Educator Experts</div>
+            </a>
+            <a href="#" class="comm-badge">
+                <div class="comm-badge-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                </div>
+                <div class="comm-badge-label">Microsoft Learn</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- CTA / DOWNLOAD -->
+<section class="cta-section" id="download">
+    <div class="cta-inner fade-in">
+        <span class="section-label">Get Started</span>
+        <h2>Download the full AI Toolkit</h2>
+        <p>115 pages of frameworks, case studies, checklists, and implementation guidance for every stage of your institution's AI journey.</p>
+        <a href="https://aka.ms/eduaitoolkit" class="cta-submit" style="text-decoration:none;display:inline-block;">Download Now</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div style="display:flex;align-items:center;gap:8px;">
+                <svg viewBox="0 0 23 23" width="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="11" height="11" fill="#f25022"/><rect x="12" y="0" width="11" height="11" fill="#7fba00"/><rect x="0" y="12" width="11" height="11" fill="#00a4ef"/><rect x="12" y="12" width="11" height="11" fill="#ffb900"/></svg>
+                <strong style="font-size:14px;">Microsoft Education</strong>
+            </div>
+            <p>AI Toolkit v4 &mdash; Updated January 2025. A navigator for education institutions to plan their AI journey.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Toolkit</h4>
+            <a href="#">Overview</a>
+            <a href="#">AI Navigators</a>
+            <a href="#">Plan</a>
+            <a href="#">Implement</a>
+            <a href="#">Research</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="#">Microsoft WorkLab</a>
+            <a href="#">Microsoft Learn</a>
+            <a href="#">Copilot Chat</a>
+            <a href="#">Microsoft Elevate</a>
+            <a href="#">Responsible AI</a>
+        </div>
+        <div class="footer-col">
+            <h4>Community</h4>
+            <a href="#">Showcase Schools</a>
+            <a href="#">Educator Experts</a>
+            <a href="#">Education Blog</a>
+            <a href="#">Customer Stories</a>
+        </div>
+        <div class="footer-col">
+            <h4>About</h4>
+            <a href="#">Privacy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Accessibility</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2025 Microsoft Corporation. All rights reserved.</span>
+        <div class="footer-legal">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Trademarks</a>
+            <a href="#">About our ads</a>
+        </div>
+    </div>
+</footer>
+
+<!-- SCROLL ANIMATION SCRIPT -->
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Active nav on scroll
+    window.addEventListener('scroll', () => {
+        const sections = ['overview', 'navigators', 'plan', 'implement', 'research'];
+        let current = '';
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top <= 100) current = id;
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+        });
+    });
+</script>
+</body>
+</html>
